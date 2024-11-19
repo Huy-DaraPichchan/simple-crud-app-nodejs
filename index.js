@@ -1,14 +1,13 @@
-const express = require('express')
-const mongoose = require('mongoose')
-const ProductRoute = require('./routes/product.route.js')
-const Product = require('./models/product.model.js')
+import express, { json, urlencoded } from 'express'
+import { connect } from 'mongoose'
+import ProductRoute from './routes/product.route.js'
 
 const app = express()
 
 
 //Middlewares
-app.use(express.json())
-app.use(express.urlencoded({ extended: false }))
+app.use(json())
+app.use(urlencoded({ extended: false }))
 
 //Routes
 app.use('/api/products', ProductRoute)
@@ -20,7 +19,7 @@ app.get('/', (req, res) => {
 
 
 
-mongoose.connect("mongodb+srv://admin:admin123@cluster0.hxiet.mongodb.net/Node-api?retryWrites=true&w=majority&appName=Cluster0")
+connect("mongodb+srv://admin:admin123@cluster0.hxiet.mongodb.net/Node-api?retryWrites=true&w=majority&appName=Cluster0")
     .then(() => {
         console.log(
             "Connected to the Database!"
